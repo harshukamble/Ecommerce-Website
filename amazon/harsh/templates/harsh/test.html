@@ -1,0 +1,32 @@
+{% extends 'harsh/base.html' %}
+{% block content %}
+<div class="container_fluid">
+    <div class="row">
+        {% for i in context %}
+        <div class="col-md-6 col-sm-12">
+            <div class="d-flex align-items-center justify-content-center">
+                <img src="{{ i.product.pic.url }}" alt="">
+                <p>{{ i.product.title }}</p>
+                <p>{{ i.product.selling_price }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="col-md-6 col-sm-12">
+            <div class="row">
+                <div class="col-md-6 col-md-12">
+                    <div class=" shadow-lg card-card-body d-flex align-items-center justify-content-center">
+                        <h4>Total order:</h4>
+                        <p>shiiping charges:</p>
+                        <div class="d-grid">
+                            <button class="btn btn-warning">
+                                Place_order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

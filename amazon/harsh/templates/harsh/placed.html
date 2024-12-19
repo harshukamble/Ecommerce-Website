@@ -1,0 +1,15 @@
+{% extends 'harsh/base.html' %}
+{% block content %}
+<div class="container fluid">
+    {% for i in messages %}
+        {% if 'success' in i.tags %}
+            <h1 class="text-primary">{{ i }}</h1>
+        {% elif 'error' in i.tags %}
+        <div class="alert alert-danger alert-dismissible" data-bs-dismiss="alert">
+            {{ i }}
+            <button class="btn btn-close"></button>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock content %}

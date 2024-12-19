@@ -1,0 +1,40 @@
+{% extends 'harsh/base.html' %}
+{% load static %}
+{% block nav %}
+    {% if request.user.is_authenticated %}
+    <li class="nav-item">
+        <a href="" class="nav-link text-warning">welcome, {{ name }}</a>
+    </li>
+    {% endif %}
+{% endblock nav %}
+{% block  content%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-sm-2">
+            <div class="dropdown" >
+                <a href="" class="dropdown-toggle btn btn-warning my-5" data-bs-toggle="dropdown">Brand</a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'mobile' 'MI' %}" class="dropdown-item">MI</a></li>
+                    <li><a href="{% url 'mobile' 'samsung' %}" class="dropdown-item">Samsung</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-12">
+            <div class="row">
+                {% for i in mobile %}
+                    <div class="col-md-3 col-sm-4 d-flex flex-column g-4">
+                        <div class="card card-body ">
+                            <img src="{{ i.pic.url }}" alt="" class="card-img-top w-100 h-50vh d-flex object-fit-cover">
+                            <h4 class="card-text">{{ i.title }}</h4>
+                            <p class="card-text">{{ i.discounted_price }}</p>
+                            <div class="d-grid">
+                                <a href="{% url 'add_to_cart' i.id %}" class="btn btn-primary">add_to_cart</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

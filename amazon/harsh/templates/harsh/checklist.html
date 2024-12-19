@@ -1,0 +1,31 @@
+{% extends 'harsh/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="container-fluid vh-100 d-flex align-items-center">
+                <div class=" card card-body shadow-lg">
+                       <p>selling_price:{{ sp }}</p>
+                       <p>discounted_price:{{ dp }}</p>
+                       <p>shipping_charge:Rs.20</p>
+                       <h2>total:{{ t }}</h2> 
+                       <a href="{% url 'giveorder' %}" class="btn btn-warning">Place_order</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="container-fluid vh-100 d-flex align-items-center">
+                <div class="card card-body d-flex  shadow-lg">
+                    <h4>Name: {{ fn }}</h4>
+                    <p>City: {{ c }}</p>
+                    <p>State: {{ s }}</p>
+                    <p>Mobile: {{ m }}</p>
+                    <a href="{% url 'details' %}" class="btn btn-primary">change the address</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

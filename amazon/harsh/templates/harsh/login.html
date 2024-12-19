@@ -1,0 +1,32 @@
+{% extends 'harsh/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container-fluid">
+    {% for i in messages %}
+    {% if 'success' in i.tags %}
+    <div class="alert alert-success alert-dismissible" data-bs-dismiss="alert">
+        {{ i }}
+        <button class="btn btn-close"></button>
+    </div>
+    {% elif 'error' in i.tags %}
+    <div class="alert alert-danger alert-dismissible" data-bs-dismiss="alert">
+        {{ i }}
+        <button class="btn btn-close"></button>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<div class="container-fluid vh-100 d-flex" style="max-width: 500px;">
+    <div class="card  card-body d-flex justify-content-center align-item-center shadow-lg" style="max-height: 350px; margin-top: 150px;">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="d-grid my-1">
+                <button type="submit" class=" btn btn-primary ">
+                    Login
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

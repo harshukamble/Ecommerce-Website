@@ -1,0 +1,66 @@
+{% extends 'harsh/base.html' %}
+{% block content %}
+<div class="container fluid">
+    {% for i in messages %}
+        {% if 'success' in i.tags %}
+            <div class="alert alert-success alert-dismissible" data-bs-dismiss="alert">
+                {{ i }}
+                <button class="btn btn-close"></button>
+            </div>
+        {% elif 'error' in i.tags %}
+        <div class="alert alert-danger alert-dismissible" data-bs-dismiss="alert">
+            {{ i }}
+            <button class="btn btn-close"></button>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="container_fluid">
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
+            <div class="row">
+                {% for i in context %}
+                    {% if i.quantity > 0 %}
+                    <div class="col-md-12 col-sm-12 g-4 shadow-lg">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="{{ i.product.pic.url }}" alt="">
+                            </div>
+                            <div class="col-md-4">
+                                <h3>{{ i.product.title }}</h3>
+                                <h3>{{ i.product.discounted_price }}</h3>
+                                <p>{{ i.product.category }}</p>
+                                <p>{{ i.product.brand }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-grid">
+                                    <a href="{% url 'remove' id=i.product.id %}" class=" my-4 btn btn-danger">remove_from_cart</a>
+                                </div>
+                                <form action="{% url 'update' id=i.product.id %}" method="POST" class="d-grid">
+                                    {% csrf_token %}
+                                    <input type="number" name="quant" value="{{ i.quantity }}" id="quant" min="1">
+                                    <div class="d-grid my-2">
+                                        <button type="submit" class="btn btn-warning">update</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="container-fluid vh-100 d-flex align-items-center">
+                <div class=" card card-body shadow-lg">
+                       <p>selling_price:{{ sp }}</p>
+                       <p>discounted_price:{{ dp }}</p>
+                       <p>shipping_charge:Rs.20</p>
+                       <h2>total:{{ t }}</h2> 
+                       <a href="{% url 'place' %}" class="btn btn-warning">Place_order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
